@@ -1,0 +1,132 @@
+---
+import { accueil } from '../lib/contenu';
+
+const { sommaire } = accueil;
+// Les visuels de remplacement alternent trois nuances d'azur.
+const nuances = ['var(--azur-clair)', 'var(--azur-moyen)', 'var(--azur-tres-clair)'];
+---
+
+<section id="sommaire" class="sommaire" aria-labelledby="titre-sommaire">
+  <div class="sommaire-entete">
+    <h2 id="titre-sommaire">{sommaire.titre}</h2>
+    <a class="lien-discret" href={sommaire.lienComplet.lien}>{sommaire.lienComplet.libelle}</a>
+  </div>
+
+  <div class="grille">
+    {sommaire.articles.map((article, index) => (
+      <article class="carte">
+        {article.image ? (
+          <img class="visuel" src={article.image} alt="" width="400" height="260" loading="lazy" />
+        ) : (
+          <div class="visuel visuel-vide" style={`background: ${nuances[index % nuances.length]}`} aria-hidden="true">
+            [Visuel]
+          </div>
+        )}
+        <p class="rubrique">{article.rubrique}</p>
+        <h3>
+          {article.lien ? <a href={article.lien}>{article.titre}</a> : article.titre}
+        </h3>
+        {(article.chapo || article.auteur) && (
+          <p class="meta">
+            {article.chapo}
+            {article.chapo && article.auteur && ' — '}
+            {article.auteur}
+          </p>
+        )}
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .sommaire-entete {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 24px;
+    margin-bottom: 36px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--bleu-nuit);
+  }
+
+  h2 {
+    font-size: 42px;
+    line-height: 1.1;
+  }
+
+  .lien-discret {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--bleu-nuit);
+    text-decoration: none;
+  }
+
+  .lien-discret:hover {
+    color: var(--azur);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px 28px;
+  }
+
+  .carte {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .visuel {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .visuel-vide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--texte-secondaire);
+  }
+
+  .rubrique {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--azur);
+  }
+
+  h3 {
+    font-size: 27px;
+    line-height: 1.15;
+  }
+
+  h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .meta {
+    font-size: 15px;
+    color: var(--texte-discret);
+  }
+
+  @media (max-width: 640px) {
+    h2 {
+      font-size: 34px;
+    }
+  }
+</style>

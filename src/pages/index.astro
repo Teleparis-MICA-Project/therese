@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Presentation from '../components/Presentation.astro';
+import Sommaire from '../components/Sommaire.astro';
+import Editorial from '../components/Editorial.astro';
+import Abonnement from '../components/Abonnement.astro';
+---
+
+<Base>
+  <div class="accueil">
+    <div class="colonne-principale">
+      <Presentation />
+      <Sommaire />
+      <Editorial />
+    </div>
+    <div class="colonne-laterale">
+      <Abonnement />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .accueil {
+    max-width: var(--largeur-max);
+    margin: 0 auto;
+    padding: 56px var(--marge-laterale) 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 56px;
+  }
+
+  .colonne-principale {
+    flex: 999 1 640px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .colonne-laterale {
+    flex: 1 1 360px;
+    min-width: 0;
+  }
+
+  @media (max-width: 640px) {
+    .accueil {
+      padding-top: 36px;
+      padding-bottom: 56px;
+      gap: 40px;
+    }
+
+    .colonne-principale {
+      gap: 56px;
+    }
+  }
+</style>

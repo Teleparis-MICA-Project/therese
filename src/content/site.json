@@ -1,0 +1,25 @@
+{
+  "nom": "Thérèse",
+  "sousTitre": "Revue trimestrielle",
+  "description": "Thérèse, revue papier trimestrielle consacrée à la politique, à la société et aux valeurs catholiques.",
+  "bandeau": "Lancement de la revue · Premier numéro prévu le [DATE DE PARUTION]",
+  "menu": [
+    { "libelle": "Accueil", "lien": "/" },
+    { "libelle": "La revue", "lien": "#" },
+    { "libelle": "Au sommaire", "lien": "/#sommaire" },
+    { "libelle": "Contact", "lien": "#" }
+  ],
+  "boutonAbonnement": { "libelle": "S’abonner", "lien": "/#abonnement" },
+  "piedDePage": {
+    "accroche": "Revue catholique trimestrielle",
+    "liens": [
+      { "libelle": "Contact", "lien": "#" },
+      { "libelle": "Mentions légales", "lien": "#" },
+      { "libelle": "Conditions générales de vente", "lien": "#" },
+      { "libelle": "Politique de confidentialité", "lien": "#" },
+      { "libelle": "Gestion des cookies", "lien": "#" },
+      { "libelle": "Plan du site", "lien": "#" }
+    ],
+    "mentionEditeur": "[Raison sociale et coordonnées de l’éditeur]"
+  }
+}

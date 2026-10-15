@@ -1,0 +1,136 @@
+---
+import Croix from './Croix.astro';
+import { accueil, site } from '../lib/contenu';
+
+const { presentation } = accueil;
+const { couverture } = presentation;
+---
+
+<section class="presentation" aria-labelledby="titre-principal">
+  <div class="presentation-texte">
+    <p class="surtitre">{presentation.surtitre}</p>
+    <h1 id="titre-principal">{presentation.titre}</h1>
+    <p class="chapeau">{presentation.texte}</p>
+    <div class="actions">
+      <a class="bouton" href={presentation.boutonPrincipal.lien}>{presentation.boutonPrincipal.libelle}</a>
+      <a class="bouton-contour" href={presentation.boutonSecondaire.lien}>{presentation.boutonSecondaire.libelle}</a>
+    </div>
+  </div>
+
+  {couverture.image ? (
+    <figure class="couverture couverture-image">
+      <img src={couverture.image} alt={couverture.texteAlternatif} width="280" height="372" loading="eager" />
+    </figure>
+  ) : (
+    <div class="couverture" role="img" aria-label={couverture.texteAlternatif}>
+      <span class="couverture-numero">{couverture.numero}</span>
+      <span class="couverture-centre">
+        <span class="couverture-croix"><Croix largeur={34} epaisseur={2} /></span>
+        <span class="couverture-titre">{site.nom}</span>
+      </span>
+      <span class="couverture-legende">{couverture.legendeSansImage}</span>
+    </div>
+  )}
+</section>
+
+<style>
+  .presentation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px 48px;
+  }
+
+  .presentation-texte {
+    flex: 1 1 340px;
+    min-width: 0;
+  }
+
+  h1 {
+    margin: 16px 0 22px;
+    font-size: 64px;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+
+  .chapeau {
+    max-width: 520px;
+    margin-bottom: 30px;
+    font-size: 19px;
+    color: var(--texte-secondaire);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .couverture {
+    flex: 0 1 280px;
+    width: 280px;
+    max-width: 100%;
+    height: 372px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background: var(--azur-pale);
+    border: 1px solid var(--bleu-nuit);
+    box-shadow: 12px 12px 0 var(--azur-clair);
+  }
+
+  .couverture-image {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .couverture-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .couverture-numero {
+    align-self: flex-start;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--texte-secondaire);
+  }
+
+  .couverture-centre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .couverture-croix {
+    display: flex;
+    color: var(--azur);
+  }
+
+  .couverture-titre {
+    font-family: var(--police-titres);
+    font-size: 58px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .couverture-legende {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--texte-secondaire);
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 44px;
+    }
+  }
+</style>

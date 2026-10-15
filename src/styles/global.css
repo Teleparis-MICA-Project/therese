@@ -1,0 +1,142 @@
+/*
+ * Charte graphique de Thérèse : couleurs, typographies, réglages de base.
+ * Les composants utilisent ces variables ; changer une couleur ici la
+ * change partout sur le site.
+ */
+:root {
+  /* Couleurs */
+  --bleu-nuit: #0E2A47;      /* texte principal, pied de page */
+  --azur: #0B63B6;           /* accents, boutons principaux */
+  --azur-pale: #EAF4FC;      /* fonds légers */
+  --azur-voile: #F4F9FD;     /* fond de l'encadré d'abonnement */
+  --azur-clair: #D6E9F8;     /* visuels de remplacement, ombres */
+  --azur-moyen: #C5E0F6;
+  --azur-tres-clair: #E3F0FB;
+  --bordure: #B9D8F2;
+  --texte-secondaire: #35506B;
+  --texte-discret: #4A6178;
+  --blanc: #FFFFFF;
+
+  /* Typographies */
+  --police-titres: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --police-texte: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Mise en page */
+  --largeur-max: 1240px;
+  --marge-laterale: 40px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--blanc);
+  color: var(--bleu-nuit);
+  font-family: var(--police-texte);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--police-titres);
+  font-weight: 600;
+  color: var(--bleu-nuit);
+  text-wrap: balance;
+}
+
+p, blockquote, figure {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--azur);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--azur);
+  outline-offset: 2px;
+}
+
+.surtitre {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--azur);
+}
+
+.bouton,
+.bouton-contour {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 26px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+}
+
+.bouton {
+  background: var(--azur);
+  color: var(--blanc);
+}
+
+.bouton:hover {
+  background: #0A5AA6;
+  color: var(--blanc);
+}
+
+.bouton-contour {
+  border: 1.5px solid var(--bleu-nuit);
+  color: var(--bleu-nuit);
+  background: transparent;
+}
+
+.bouton-contour:hover {
+  background: var(--bleu-nuit);
+  color: var(--blanc);
+}
+
+.visuellement-masque {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --marge-laterale: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

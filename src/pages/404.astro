@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titre="Page introuvable">
+  <section class="introuvable">
+    <p class="surtitre">Erreur 404</p>
+    <h1>Cette page est introuvable</h1>
+    <p>La page que vous cherchez n’existe pas ou a été déplacée.</p>
+    <a class="bouton" href="/">Retour à l’accueil</a>
+  </section>
+</Base>
+
+<style>
+  .introuvable {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 96px var(--marge-laterale) 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: 52px;
+    line-height: 1.05;
+  }
+</style>

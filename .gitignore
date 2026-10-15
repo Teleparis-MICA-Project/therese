@@ -1,0 +1,22 @@
+# Construction
+dist/
+.astro/
+
+# Dépendances
+node_modules/
+
+# Journaux
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environnement
+.env
+.env.production
+
+# Systèmes
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

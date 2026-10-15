@@ -1,0 +1,37 @@
+name: Vérification du site
+
+# Construit le site à chaque modification proposée ou fusionnée.
+# Si le contenu est invalide (prix mal saisi, champ manquant…),
+# la vérification échoue et indique le fichier et le champ en cause.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  construction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund
+
+      - name: Construire le site
+        run: npm run build
+
+      - name: Conserver le site construit
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 7

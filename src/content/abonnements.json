@@ -1,0 +1,26 @@
+{
+  "surtitre": "Abonnement",
+  "titre": "Recevez Thérèse chaque trimestre",
+  "texte": "La revue papier, au rythme de quatre numéros par an.",
+  "noteBoutique": "Vous serez redirigé vers notre boutique en ligne pour finaliser votre abonnement.",
+  "offres": [
+    {
+      "identifiant": "mensuelle",
+      "nom": "Offre mensuelle",
+      "periode": "mois",
+      "prixCarteBancaire": 4.9,
+      "prixSepa": 4.5,
+      "afficherEconomie": false,
+      "bouton": { "libelle": "Choisir l’offre mensuelle", "lienCarteBancaire": "#", "lienSepa": "#" }
+    },
+    {
+      "identifiant": "annuelle",
+      "nom": "Offre annuelle",
+      "periode": "an",
+      "prixCarteBancaire": 49,
+      "prixSepa": 45,
+      "afficherEconomie": true,
+      "bouton": { "libelle": "Choisir l’offre annuelle", "lienCarteBancaire": "#", "lienSepa": "#" }
+    }
+  ]
+}

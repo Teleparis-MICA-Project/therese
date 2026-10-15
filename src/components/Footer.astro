@@ -1,0 +1,119 @@
+---
+import Croix from './Croix.astro';
+import { site } from '../lib/contenu';
+
+const annee = new Date().getFullYear();
+---
+
+<footer class="pied">
+  <div class="pied-interieur">
+    <div class="pied-haut">
+      <div class="pied-marque">
+        <Croix largeur={26} />
+        <div class="pied-marque-texte">
+          <span class="pied-nom">{site.nom}</span>
+          <span class="pied-accroche">{site.piedDePage.accroche}</span>
+        </div>
+      </div>
+
+      <nav class="pied-liens" aria-label="Pied de page">
+        {site.piedDePage.liens.map((entree) => (
+          <a class="pastille" href={entree.lien}>{entree.libelle}</a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="pied-bas">
+      <span>© {annee} {site.nom}. Tous droits réservés.</span>
+      {site.piedDePage.mentionEditeur && <span>{site.piedDePage.mentionEditeur}</span>}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    background: var(--bleu-nuit);
+    color: var(--azur-clair);
+  }
+
+  .pied-interieur {
+    max-width: var(--largeur-max);
+    margin: 0 auto;
+    padding: 56px var(--marge-laterale) 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .pied-haut {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px 40px;
+  }
+
+  .pied-marque {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--azur-clair);
+  }
+
+  .pied-marque-texte {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .pied-nom {
+    font-family: var(--police-titres);
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--blanc);
+  }
+
+  .pied-accroche {
+    margin-top: 6px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .pied-liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pastille {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border: 1px solid #6F93B8;
+    color: var(--azur-pale);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .pastille:hover {
+    background: var(--azur-pale);
+    color: var(--bleu-nuit);
+  }
+
+  .pastille:focus-visible {
+    outline-color: var(--blanc);
+  }
+
+  .pied-bas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-top: 24px;
+    border-top: 1px solid #35557A;
+    font-size: 14px;
+  }
+</style>

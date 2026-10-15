@@ -1,0 +1,110 @@
+---
+import Croix from './Croix.astro';
+import { site } from '../lib/contenu';
+---
+
+{site.bandeau && <p class="bandeau">{site.bandeau}</p>}
+
+<header class="entete">
+  <a class="marque" href="/" aria-label={`${site.nom}, retour à l’accueil`}>
+    <span class="marque-croix"><Croix largeur={30} /></span>
+    <span class="marque-texte">
+      <span class="marque-nom">{site.nom}</span>
+      <span class="marque-sous-titre">{site.sousTitre}</span>
+    </span>
+  </a>
+
+  <nav class="navigation" aria-label="Navigation principale">
+    {site.menu.map((entree) => (
+      <a class="lien-nav" href={entree.lien}>{entree.libelle}</a>
+    ))}
+    <a class="bouton" href={site.boutonAbonnement.lien}>{site.boutonAbonnement.libelle}</a>
+  </nav>
+</header>
+
+<style>
+  .bandeau {
+    padding: 10px var(--marge-laterale);
+    background: var(--azur-pale);
+    color: var(--bleu-nuit);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  .entete {
+    max-width: var(--largeur-max);
+    margin: 0 auto;
+    padding: 28px var(--marge-laterale) 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    border-bottom: 1px solid var(--azur-clair);
+  }
+
+  .marque {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--bleu-nuit);
+    text-decoration: none;
+  }
+
+  .marque-croix {
+    display: flex;
+    color: var(--azur);
+  }
+
+  .marque-texte {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .marque-nom {
+    font-family: var(--police-titres);
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .marque-sous-titre {
+    margin-top: 6px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--texte-discret);
+  }
+
+  .navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 30px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .lien-nav {
+    color: var(--bleu-nuit);
+    text-decoration: none;
+  }
+
+  .lien-nav:hover {
+    color: var(--azur);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .marque-nom {
+      font-size: 40px;
+    }
+
+    .navigation {
+      gap: 8px 20px;
+    }
+  }
+</style>

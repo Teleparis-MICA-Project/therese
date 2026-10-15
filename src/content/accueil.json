@@ -1,0 +1,75 @@
+{
+  "presentation": {
+    "surtitre": "Numéro 1 · Édition papier",
+    "titre": "Une revue catholique pour comprendre le temps présent",
+    "texte": "Thérèse est une revue papier trimestrielle consacrée à la politique, à la société et aux valeurs catholiques. Son premier numéro paraît le [DATE DE PARUTION].",
+    "boutonPrincipal": { "libelle": "Découvrir l’abonnement", "lien": "#abonnement" },
+    "boutonSecondaire": { "libelle": "Au sommaire", "lien": "#sommaire" },
+    "couverture": {
+      "numero": "N°1",
+      "image": "",
+      "texteAlternatif": "Couverture du numéro 1 de Thérèse",
+      "legendeSansImage": "[Visuel de couverture]"
+    }
+  },
+  "sommaire": {
+    "titre": "Au sommaire du numéro 1",
+    "lienComplet": { "libelle": "Voir le sommaire complet", "lien": "#" },
+    "articles": [
+      {
+        "rubrique": "Politique",
+        "titre": "[Titre de l’article]",
+        "chapo": "[Chapô en deux lignes]",
+        "auteur": "[Auteur]",
+        "image": "",
+        "lien": ""
+      },
+      {
+        "rubrique": "Foi et société",
+        "titre": "[Titre de l’article]",
+        "chapo": "[Chapô en deux lignes]",
+        "auteur": "[Auteur]",
+        "image": "",
+        "lien": ""
+      },
+      {
+        "rubrique": "Culture",
+        "titre": "[Titre de l’article]",
+        "chapo": "[Chapô en deux lignes]",
+        "auteur": "[Auteur]",
+        "image": "",
+        "lien": ""
+      },
+      {
+        "rubrique": "Entretien",
+        "titre": "[Titre de l’entretien]",
+        "chapo": "[Chapô en deux lignes]",
+        "auteur": "[Interlocuteur]",
+        "image": "",
+        "lien": ""
+      },
+      {
+        "rubrique": "Histoire",
+        "titre": "[Titre de l’article]",
+        "chapo": "[Chapô en deux lignes]",
+        "auteur": "[Auteur]",
+        "image": "",
+        "lien": ""
+      },
+      {
+        "rubrique": "Chronique",
+        "titre": "[Titre de la chronique]",
+        "chapo": "[Chapô en deux lignes]",
+        "auteur": "[Auteur]",
+        "image": "",
+        "lien": ""
+      }
+    ]
+  },
+  "editorial": {
+    "surtitre": "Éditorial",
+    "extrait": "[Extrait de l’éditorial du numéro 1]",
+    "signature": "[Nom de l’éditorialiste], [fonction]",
+    "bouton": { "libelle": "Lire l’éditorial", "lien": "#" }
+  }
+}

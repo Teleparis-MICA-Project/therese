@@ -1,0 +1,22 @@
+---
+/** Petite croix décorative de la marque. */
+interface Props {
+  largeur?: number;
+  epaisseur?: number;
+}
+const { largeur = 30, epaisseur = 2.5 } = Astro.props;
+const hauteur = Math.round((largeur * 44) / 30);
+---
+
+<svg
+  aria-hidden="true"
+  width={largeur}
+  height={hauteur}
+  viewBox="0 0 30 44"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={epaisseur}
+  stroke-linecap="square"
+>
+  <path d="M15 3 V41 M4 15 H26"></path>
+</svg>

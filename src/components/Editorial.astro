@@ -1,0 +1,57 @@
+---
+import { accueil } from '../lib/contenu';
+
+const { editorial } = accueil;
+---
+
+<section class="editorial" aria-label={editorial.surtitre}>
+  <div class="editorial-corps">
+    <p class="surtitre">{editorial.surtitre}</p>
+    <blockquote>
+      <p>{editorial.extrait}</p>
+    </blockquote>
+    {editorial.signature && <p class="signature">{editorial.signature}</p>}
+  </div>
+  <a class="bouton-contour" href={editorial.bouton.lien}>{editorial.bouton.libelle}</a>
+</section>
+
+<style>
+  .editorial {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px 48px;
+    padding: 52px 44px;
+    background: var(--azur-pale);
+  }
+
+  .editorial-corps {
+    flex: 1 1 280px;
+    min-width: 0;
+  }
+
+  blockquote {
+    margin-top: 14px;
+    font-family: var(--police-titres);
+    font-size: 34px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .signature {
+    margin-top: 18px;
+    font-size: 15px;
+    color: var(--texte-secondaire);
+  }
+
+  @media (max-width: 640px) {
+    .editorial {
+      padding: 36px 24px;
+    }
+
+    blockquote {
+      font-size: 28px;
+    }
+  }
+</style>

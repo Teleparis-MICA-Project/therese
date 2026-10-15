@@ -1,0 +1,67 @@
+---
+/**
+ * Gabarit commun à toutes les pages : en-tête, contenu, pied de page.
+ * Les polices sont hébergées avec le site (pas d'appel à Google Fonts).
+ */
+import '@fontsource/figtree/400.css';
+import '@fontsource/figtree/500.css';
+import '@fontsource/figtree/600.css';
+import '@fontsource/figtree/700.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/700.css';
+import '../styles/global.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../lib/contenu';
+
+interface Props {
+  titre?: string;
+  description?: string;
+}
+
+const { titre, description = site.description } = Astro.props;
+const titreComplet = titre ? `${titre} · ${site.nom}` : `${site.nom} · ${site.sousTitre}`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titreComplet}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+  </head>
+  <body>
+    <a class="lien-evitement" href="#contenu">Aller au contenu</a>
+    <Header />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .lien-evitement {
+    position: absolute;
+    left: 16px;
+    top: -60px;
+    z-index: 10;
+    padding: 10px 16px;
+    background: var(--bleu-nuit);
+    color: var(--blanc);
+    font-weight: 600;
+  }
+
+  .lien-evitement:focus {
+    top: 16px;
+  }
+</style>

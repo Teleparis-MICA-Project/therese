@@ -1,0 +1,224 @@
+---
+/**
+ * Encadré d'abonnement. Les offres, prix et liens viennent de
+ * src/content/abonnements.json. Le choix Carte bancaire / SEPA
+ * fonctionne sans JavaScript (boutons radio + CSS).
+ */
+import { abonnements, economieAnnuelle, formaterPrix, type ModePaiement } from '../lib/contenu';
+
+const modes: { mode: ModePaiement; cle: 'cb' | 'sepa'; libelle: string; description: string }[] = [
+  { mode: 'carteBancaire', cle: 'cb', libelle: 'Carte bancaire', description: 'Paiement par carte bancaire' },
+  { mode: 'sepa', cle: 'sepa', libelle: 'Prélèvement SEPA', description: 'Paiement par prélèvement SEPA' },
+];
+---
+
+<aside id="abonnement" class="abonnement" aria-labelledby="titre-abonnement">
+  <div>
+    <p class="surtitre">{abonnements.surtitre}</p>
+    <h2 id="titre-abonnement">{abonnements.titre}</h2>
+    <p class="sous-texte">{abonnements.texte}</p>
+  </div>
+
+  {abonnements.offres.map((offre) => {
+    const groupe = `paiement-${offre.identifiant}`;
+    return (
+      <div class="offre">
+        <h3>{offre.nom}</h3>
+        <fieldset class="paiement">
+          <legend class="visuellement-masque">Mode de paiement de l’{offre.nom.toLowerCase()}</legend>
+
+          <input class="choix choix-cb" type="radio" name={groupe} id={`${groupe}-cb`} checked />
+          <input class="choix choix-sepa" type="radio" name={groupe} id={`${groupe}-sepa`} />
+
+          <div class="bascule">
+            {modes.map((m) => (
+              <label class={`option option-${m.cle}`} for={`${groupe}-${m.cle}`}>{m.libelle}</label>
+            ))}
+          </div>
+
+          {modes.map((m) => {
+            const prix = m.mode === 'carteBancaire' ? offre.prixCarteBancaire : offre.prixSepa;
+            const economie = economieAnnuelle(offre, m.mode);
+            const lien = m.mode === 'carteBancaire' ? offre.bouton.lienCarteBancaire : offre.bouton.lienSepa;
+            return (
+              <div class={`tarif tarif-${m.cle}`}>
+                {economie !== null && (
+                  <p class="economie">Économisez {formaterPrix(economie)} sur l’année</p>
+                )}
+                <p class="montant">
+                  <span class="prix">{formaterPrix(prix)}</span>
+                  <span class="periode">par {offre.periode}</span>
+                </p>
+                <p class="mode">{m.description}</p>
+                <a class="bouton bouton-offre" href={lien}>{offre.bouton.libelle}</a>
+              </div>
+            );
+          })}
+        </fieldset>
+      </div>
+    );
+  })}
+
+  {abonnements.noteBoutique && <p class="note">{abonnements.noteBoutique}</p>}
+</aside>
+
+<style>
+  .abonnement {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 28px;
+    background: var(--azur-voile);
+    border: 1px solid var(--bordure);
+  }
+
+  h2 {
+    margin: 10px 0;
+    font-size: 38px;
+    line-height: 1.08;
+  }
+
+  .sous-texte,
+  .note {
+    font-size: 15px;
+    color: var(--texte-discret);
+  }
+
+  .note {
+    font-size: 14px;
+  }
+
+  .offre {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px 22px 24px;
+    background: var(--blanc);
+    border: 1px solid var(--bordure);
+  }
+
+  h3 {
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  .paiement {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* Les boutons radio restent dans la page (clavier, lecteurs d'écran) mais sont invisibles. */
+  .choix {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .bascule {
+    display: flex;
+    border: 1px solid var(--bleu-nuit);
+  }
+
+  .option {
+    flex: 1 1 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    background: var(--blanc);
+    color: var(--bleu-nuit);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .option + .option {
+    border-left: 1px solid var(--bleu-nuit);
+  }
+
+  .option:hover {
+    background: var(--azur-pale);
+  }
+
+  /* Option sélectionnée */
+  .choix-cb:checked ~ .bascule .option-cb,
+  .choix-sepa:checked ~ .bascule .option-sepa {
+    background: var(--bleu-nuit);
+    color: var(--blanc);
+  }
+
+  /* Focus clavier visible sur l'option active */
+  .choix-cb:focus-visible ~ .bascule .option-cb,
+  .choix-sepa:focus-visible ~ .bascule .option-sepa {
+    outline: 3px solid var(--azur);
+    outline-offset: 2px;
+  }
+
+  /* Seul le tarif du mode choisi est affiché */
+  .choix-cb:checked ~ .tarif-sepa,
+  .choix-sepa:checked ~ .tarif-cb {
+    display: none;
+  }
+
+  .tarif {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .economie {
+    padding: 4px 10px;
+    background: var(--azur-pale);
+    color: var(--bleu-nuit);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .montant {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+  }
+
+  .prix {
+    font-family: var(--police-titres);
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .periode {
+    font-size: 16px;
+    color: var(--texte-discret);
+  }
+
+  .mode {
+    font-size: 14px;
+    color: var(--texte-discret);
+  }
+
+  .bouton-offre {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 640px) {
+    .abonnement {
+      padding: 28px 18px;
+    }
+  }
+</style>
