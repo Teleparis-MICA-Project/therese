@@ -12,6 +12,7 @@ import { z } from 'astro/zod';
 import siteBrut from '../content/site.json';
 import accueilBrut from '../content/accueil.json';
 import abonnementsBrut from '../content/abonnements.json';
+import mentionsLegalesBrut from '../content/mentions-legales.json';
 
 /* ------------------------------------------------------------------ */
 /* Schémas                                                             */
@@ -117,11 +118,27 @@ const abonnementsSchema = z.object({
     .refine((offres) => new Set(offres.map((o) => o.identifiant)).size === offres.length, 'Deux offres ont le même identifiant.'),
 });
 
+const mentionsLegalesSchema = z.object({
+  titre: texte,
+  introduction: z.string().trim(),
+  miseAJour: z.string().trim(),
+  sections: z
+    .array(
+      z.object({
+        titre: texte,
+        informations: z.array(z.object({ libelle: texte, valeur: texte, lien: lien.optional() })).default([]),
+        paragraphes: z.array(texte).default([]),
+        lien: bouton.optional(),
+      }),
+    )
+    .min(1, 'Les mentions légales doivent contenir au moins une rubrique.'),
+});
+
 /* ------------------------------------------------------------------ */
 /* Validation                                                          */
 /* ------------------------------------------------------------------ */
 
-function valider<T>(schema: z.ZodType<T>, donnees: unknown, fichier: string): T {
+function valider<S extends z.ZodType>(schema: S, donnees: unknown, fichier: string): z.output<S> {
   const resultat = schema.safeParse(donnees);
   if (!resultat.success) {
     const details = resultat.error.issues
@@ -135,6 +152,7 @@ function valider<T>(schema: z.ZodType<T>, donnees: unknown, fichier: string): T 
 export const site = valider(siteSchema, siteBrut, 'site.json');
 export const accueil = valider(accueilSchema, accueilBrut, 'accueil.json');
 export const abonnements = valider(abonnementsSchema, abonnementsBrut, 'abonnements.json');
+export const mentionsLegales = valider(mentionsLegalesSchema, mentionsLegalesBrut, 'mentions-legales.json');
 
 /* ------------------------------------------------------------------ */
 /* Prix                                                                */

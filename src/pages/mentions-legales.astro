@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+import { mentionsLegales, site } from '../lib/contenu';
+
+const estExterne = (url: string) => /^https?:\/\//.test(url);
+---
+
+<Base titre={mentionsLegales.titre} description={`${mentionsLegales.titre} du site ${site.nom}.`}>
+  <article class="mentions">
+    <header class="mentions-entete">
+      <p class="surtitre">Informations légales</p>
+      <h1>{mentionsLegales.titre}</h1>
+      {mentionsLegales.introduction && <p class="introduction">{mentionsLegales.introduction}</p>}
+    </header>
+
+    {mentionsLegales.sections.map((section) => (
+      <section class="rubrique">
+        <h2>{section.titre}</h2>
+
+        {section.informations.length > 0 && (
+          <dl class="informations">
+            {section.informations.map((info) => (
+              <div class="ligne">
+                <dt>{info.libelle}</dt>
+                <dd>
+                  {info.lien ? (
+                    <a href={info.lien} {...(estExterne(info.lien) ? { rel: 'noopener noreferrer', target: '_blank' } : {})}>
+                      {info.valeur}
+                    </a>
+                  ) : (
+                    info.valeur
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        {section.paragraphes.map((paragraphe) => <p class="paragraphe">{paragraphe}</p>)}
+
+        {section.lien && (
+          <p class="paragraphe">
+            <a href={section.lien.lien}>{section.lien.libelle}</a>
+          </p>
+        )}
+      </section>
+    ))}
+
+    {mentionsLegales.miseAJour && <p class="mise-a-jour">Dernière mise à jour : {mentionsLegales.miseAJour}</p>}
+  </article>
+</Base>
+
+<style>
+  .mentions {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 64px var(--marge-laterale) 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .mentions-entete {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--bleu-nuit);
+  }
+
+  h1 {
+    font-size: 56px;
+    line-height: 1.05;
+  }
+
+  .introduction {
+    font-size: 18px;
+    color: var(--texte-secondaire);
+  }
+
+  .rubrique {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  h2 {
+    font-size: 34px;
+    line-height: 1.1;
+  }
+
+  .informations {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--azur-clair);
+  }
+
+  .ligne {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--azur-clair);
+  }
+
+  dt {
+    flex: 0 0 260px;
+    max-width: 100%;
+    font-weight: 600;
+  }
+
+  dd {
+    flex: 1 1 280px;
+    min-width: 0;
+    margin: 0;
+    color: var(--texte-secondaire);
+    overflow-wrap: anywhere;
+  }
+
+  .paragraphe {
+    color: var(--texte-secondaire);
+  }
+
+  .mise-a-jour {
+    font-size: 14px;
+    color: var(--texte-discret);
+  }
+
+  @media (max-width: 640px) {
+    .mentions {
+      padding-top: 40px;
+      padding-bottom: 64px;
+      gap: 40px;
+    }
+
+    h1 {
+      font-size: 42px;
+    }
+
+    h2 {
+      font-size: 28px;
+    }
+  }
+</style>
