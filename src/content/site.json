@@ -14,12 +14,12 @@
     "accroche": "Revue catholique trimestrielle",
     "liens": [
       { "libelle": "Contact", "lien": "#" },
-      { "libelle": "Mentions légales", "lien": "#" },
+      { "libelle": "Mentions légales", "lien": "/mentions-legales" },
       { "libelle": "Conditions générales de vente", "lien": "#" },
       { "libelle": "Politique de confidentialité", "lien": "#" },
       { "libelle": "Gestion des cookies", "lien": "#" },
       { "libelle": "Plan du site", "lien": "#" }
     ],
-    "mentionEditeur": "[Raison sociale et coordonnées de l’éditeur]"
+    "mentionEditeur": "Édité par MICA Project · 24 rue Anatole France, 92300 Levallois-Perret"
   }
 }
